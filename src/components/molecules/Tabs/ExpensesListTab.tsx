@@ -26,8 +26,8 @@ const ExpensesListTab = (): JSX.Element => {
     return (
       <View style={tw`flex-col w-full p-3 gap-y-5 rounded-xl shadow-md bg-accent-1`}>
         <View style={tw`flex-row items-center justify-between w-full gap-x-3`}>
-          <Text style={tw`font-poppins text-xs text-accent-2`}>Expense</Text>
-          <Text style={tw`font-poppins text-[11px] text-neutral-400`}>
+          <Text style={tw`font-poppins-bold text-xs text-accent-2`}>Expense</Text>
+          <Text style={tw`font-poppins text-[11px] text-neutral-500`}>
             {moment(createdAt).format('lll')}
           </Text>
         </View>
@@ -59,7 +59,7 @@ const ExpensesListTab = (): JSX.Element => {
   };
 
   return (
-    <View style={tw`flex-1 bg-accent-3`}>
+    <View style={tw`flex-1 bg-accent-5`}>
       <FlatList
         contentContainerStyle={tw`w-full gap-y-2 p-2`}
         keyboardShouldPersistTaps="handled"
