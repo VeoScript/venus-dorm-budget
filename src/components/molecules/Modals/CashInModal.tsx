@@ -1,17 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import tw from '../../../styles/tailwind';
 import {FeatherIcon} from '../../../utils/Icons';
+import {Toast} from '../../../utils/Toast';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 
 import Modal from 'react-native-modal';
 
 import {cashInModalStore} from '../../../helpers/store/modals';
+import {currentBalanceStore, cashInReportStore} from '../../../helpers/store';
 
 const CashInModal = (): JSX.Element => {
   const {isVisible, setIsVisible} = cashInModalStore();
+  const {setCashInReportData} = cashInReportStore();
+  const {currentBalance, setCurrentBalance} = currentBalanceStore();
+
+  const [amount, setAmount] = useState<number>(0);
 
   const onClose = () => {
+    setAmount(0);
     setIsVisible(false);
+  };
+
+  const handleCashIn = () => {
+    if (amount == 0) return Toast('Invalid amount');
+
+    // save storage for cash in report...
+    setCashInReportData({
+      type: 'cash-in',
+      amount,
+      createdAt: new Date(),
+    });
+
+    // save storage for current balance...
+    setCurrentBalance(currentBalance + amount);
+
+    onClose();
   };
 
   return (
@@ -37,6 +60,7 @@ const CashInModal = (): JSX.Element => {
             <TextInput
               editable={false}
               style={tw`w-full p-3 rounded-xl shadow-md font-poppins text-sm text-accent-2 bg-accent-1`}
+              value={String(currentBalance)}
             />
           </View>
           <View style={tw`flex-col w-full gap-y-2`}>
@@ -44,9 +68,13 @@ const CashInModal = (): JSX.Element => {
             <TextInput
               keyboardType="decimal-pad"
               style={tw`w-full p-3 rounded-xl shadow-md font-poppins text-sm text-accent-2 bg-accent-1`}
+              value={String(amount)}
+              onChangeText={value => setAmount(Number(value))}
             />
           </View>
-          <TouchableOpacity style={tw`flex-row justify-center w-full p-3 rounded-xl bg-accent-5`}>
+          <TouchableOpacity
+            style={tw`flex-row justify-center w-full p-3 rounded-xl bg-accent-5`}
+            onPress={handleCashIn}>
             <Text style={tw`font-poppins text-sm text-accent-1`}>Proceed</Text>
           </TouchableOpacity>
         </View>

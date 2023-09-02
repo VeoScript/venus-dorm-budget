@@ -8,44 +8,33 @@ import AddExpenseModal from '../Modals/AddExpenseModal';
 
 import useMoneyFormat from '../../../helpers/hooks/useMoneyFormat';
 
-const sampleData = [
-  {
-    amount: 500,
-    createdAt: new Date(),
-  },
-  {
-    amount: 500,
-    createdAt: new Date(),
-  },
-  {
-    amount: 1500,
-    createdAt: new Date(),
-  },
-];
+import {cashInReportStore} from '../../../helpers/store';
 
-const CashInReportTab = (): JSX.Element => {
+const TransactionReportTab = (): JSX.Element => {
+  const {cashInReportData} = cashInReportStore();
+
   const itemKeyExtractor = (item: any, index: {toString: () => any}): string => {
     return index.toString();
   };
 
   const listIsEmpty: JSX.Element = (
     <View style={tw`flex-1 flex-col items-center justify-center w-full my-3 p-3`}>
-      <Text style={tw`font-poppins text-sm text-accent-3`}>No records as of now...</Text>
+      <Text style={tw`font-poppins text-sm text-accent-1`}>No records as of now...</Text>
     </View>
   );
 
   const renderData = ({item}: any): JSX.Element => {
-    const {amount, createdAt} = item;
+    const {type, amount, createdAt} = item;
     return (
       <View style={tw`flex-col w-full p-3 gap-y-1 rounded-xl shadow-md bg-accent-1`}>
         <View style={tw`flex-row items-center justify-between w-full gap-x-3`}>
-          <Text style={tw`font-poppins text-xs text-accent-2`}>Cash In</Text>
+          <Text style={tw`font-poppins text-xs text-accent-2`}>{type === 'cash-in' ? 'Cash In' : 'Expense'}</Text>
           <Text style={tw`font-poppins text-[11px] text-neutral-400`}>
             {moment(createdAt).format('lll')}
           </Text>
         </View>
-        <Text style={tw`font-poppins-bold text-base text-accent-3`}>
-          + {useMoneyFormat(amount)}
+        <Text style={tw.style('font-poppins-bold text-base', type === 'cash-in' ? 'text-accent-3' : 'text-accent-4')}>
+          {type === 'cash-in' ? '+' : '-'} {useMoneyFormat(amount)}
         </Text>
       </View>
     );
@@ -58,7 +47,7 @@ const CashInReportTab = (): JSX.Element => {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={listIsEmpty}
-        data={sampleData}
+        data={cashInReportData ? cashInReportData.sort((a, b) => Number(new Date(b.createdAt)) - Number(new Date(a.createdAt))) : []}
         keyExtractor={itemKeyExtractor}
         renderItem={renderData}
       />
@@ -68,4 +57,4 @@ const CashInReportTab = (): JSX.Element => {
   );
 };
 
-export default CashInReportTab;
+export default TransactionReportTab;

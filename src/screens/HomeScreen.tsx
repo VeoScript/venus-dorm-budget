@@ -4,9 +4,12 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import DefaultLayout from '../components/templates/DefaultLayout';
-import CashInReportTab from '../components/molecules/Tabs/CashInReportTab';
+import TransactionReportTab from '../components/molecules/Tabs/TransactionReportTab';
 import ExpensesListTab from '../components/molecules/Tabs/ExpensesListTab';
 
+import useMoneyFormat from '../helpers/hooks/useMoneyFormat';
+
+import {currentBalanceStore} from '../helpers/store';
 import {cashInModalStore, addExpenseModalStore} from '../helpers/store/modals';
 
 const Tab = createMaterialTopTabNavigator();
@@ -15,13 +18,15 @@ const HomeScreen = (): JSX.Element => {
   const {setIsVisible: setIsVisibleCashIn} = cashInModalStore();
   const {setIsVisible: setIsVisibleAddExpense} = addExpenseModalStore();
 
+  const {currentBalance} = currentBalanceStore();
+
   return (
     <DefaultLayout>
       <View style={tw`flex-1 flex-col w-full px-3 py-3 gap-y-3`}>
         <View style={tw`flex-col items-center w-full p-5 gap-y-5 rounded-2xl bg-white`}>
           <View style={tw`flex-col items-center w-full gap-y-1`}>
             <Text style={tw`font-poppins-light text-xs text-neutral-500`}>Current Balance</Text>
-            <Text style={tw`font-poppins-bold text-3xl text-accent-5 uppercase`}>₱ 20,500</Text>
+            <Text style={tw`font-poppins-bold text-3xl text-accent-5 uppercase`}>{useMoneyFormat(currentBalance)}</Text>
           </View>
           <View style={tw`flex-row items-center w-full gap-x-2`}>
             <TouchableOpacity
@@ -49,14 +54,14 @@ const HomeScreen = (): JSX.Element => {
               tabBarPressColor: '#68BCBE',
             }}>
             <Tab.Screen
+              name="TransactionReportTab"
+              component={TransactionReportTab}
+              options={{tabBarLabel: 'Transaction Report'}}
+            />
+            <Tab.Screen
               name="ExpensesListTab"
               component={ExpensesListTab}
               options={{tabBarLabel: 'Expenses List'}}
-            />
-            <Tab.Screen
-              name="CashInReportTab"
-              component={CashInReportTab}
-              options={{tabBarLabel: 'Cash In Report'}}
             />
           </Tab.Navigator>
         </View>
