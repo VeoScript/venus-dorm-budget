@@ -7,23 +7,32 @@ import DefaultLayout from '../components/templates/DefaultLayout';
 import CashInReportTab from '../components/molecules/Tabs/CashInReportTab';
 import ExpensesListTab from '../components/molecules/Tabs/ExpensesListTab';
 
+import {cashInModalStore, addExpenseModalStore} from '../helpers/store/modals';
+
 const Tab = createMaterialTopTabNavigator();
 
 const HomeScreen = () => {
+  const {setIsVisible: setIsVisibleCashIn} = cashInModalStore();
+  const {setIsVisible: setIsVisibleAddExpense} = addExpenseModalStore();
+
   return (
     <DefaultLayout>
       <View style={tw`flex-1 flex-col w-full px-3 py-3 gap-y-3`}>
         <View style={tw`flex-col items-center w-full p-5 gap-y-5 rounded-2xl bg-white`}>
-          <View style={tw`flex-col items-center w-full gap-y-3`}>
+          <View style={tw`flex-col items-center w-full gap-y-1`}>
             <Text style={tw`font-poppins-light text-xs text-neutral-500`}>Current Balance</Text>
             <Text style={tw`font-poppins-bold text-3xl text-accent-5 uppercase`}>₱ 20,500</Text>
           </View>
           <View style={tw`flex-row items-center w-full gap-x-2`}>
-            <TouchableOpacity style={tw`flex-1 flex-row justify-center w-full p-3 rounded-xl bg-accent-3`}>
-              <Text style={tw`font-poppins-medium text-sm text-accent-1`}>Cash In</Text>
+            <TouchableOpacity
+              style={tw`flex-1 flex-row justify-center w-full p-2 rounded-md bg-accent-3`}
+              onPress={() => setIsVisibleCashIn(true)}>
+              <Text style={tw`font-poppins-medium text-xs text-accent-1`}>Cash In</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={tw`flex-1 flex-row justify-center w-full p-3 rounded-xl bg-accent-4`}>
-              <Text style={tw`font-poppins-medium text-sm text-accent-1`}>Add Expense</Text>
+            <TouchableOpacity
+              style={tw`flex-1 flex-row justify-center w-full p-2 rounded-md bg-accent-4`}
+              onPress={() => setIsVisibleAddExpense(true)}>
+              <Text style={tw`font-poppins-medium text-xs text-accent-1`}>Add Expense</Text>
             </TouchableOpacity>
           </View>
         </View>
