@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import tw from '../../../styles/tailwind';
 import {FeatherIcon} from '../../../utils/Icons';
 import {Toast} from '../../../utils/Toast';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, Alert} from 'react-native';
 
 import Modal from 'react-native-modal';
 import StatusBarMain from '../../organisms/StatusBarMain';
@@ -30,29 +30,48 @@ const AddExpenseModal = (): JSX.Element => {
     if (amount == 0) return Toast('Invalid amount');
     if (amount > currentBalance) return Toast('Not enough balance');
 
-    // calculate the current balance and the expense amount...
-    const finalCurrentBalance = currentBalance - amount;
+    Alert.alert(
+      'Add Expense',
+      'Are you sure you want to proceed?',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          style: 'default',
+          onPress: () => {
+            // calculate the current balance and the expense amount...
+            const finalCurrentBalance = currentBalance - amount;
 
-    // save storage for cash in report...
-    setCashInReportData({
-      type: 'expense',
-      amount,
-      createdAt: new Date(),
-    });
+            // save storage for cash in report...
+            setCashInReportData({
+              type: 'expense',
+              amount,
+              createdAt: new Date(),
+            });
 
-    // save storage for expenses list...
-    setExpensesData({
-      purpose,
-      totalMoney: currentBalance,
-      amount: amount,
-      currentBalance: finalCurrentBalance,
-      createdAt: new Date(),
-    });
+            // save storage for expenses list...
+            setExpensesData({
+              purpose,
+              totalMoney: currentBalance,
+              amount: amount,
+              currentBalance: finalCurrentBalance,
+              createdAt: new Date(),
+            });
 
-    // save storage for current balance...
-    setCurrentBalance(finalCurrentBalance);
+            // save storage for current balance...
+            setCurrentBalance(finalCurrentBalance);
 
-    onClose();
+            onClose();
+          },
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
   };
 
   return (
@@ -75,7 +94,9 @@ const AddExpenseModal = (): JSX.Element => {
         </View>
         <View style={tw`flex-col w-full p-3 gap-y-3`}>
           <View style={tw`flex-col w-full gap-y-2`}>
-            <Text style={tw`ml-2 font-poppins-light text-xs text-accent-1`}>Your Current Balance</Text>
+            <Text style={tw`ml-2 font-poppins-light text-xs text-accent-1`}>
+              Your Current Balance
+            </Text>
             <TextInput
               editable={false}
               style={tw`w-full p-3 rounded-xl shadow-md font-poppins text-sm text-accent-1 bg-accent-6`}

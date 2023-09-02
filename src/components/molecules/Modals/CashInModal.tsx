@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import tw from '../../../styles/tailwind';
 import {FeatherIcon} from '../../../utils/Icons';
 import {Toast} from '../../../utils/Toast';
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput, Alert} from 'react-native';
 
 import Modal from 'react-native-modal';
 
@@ -24,17 +24,36 @@ const CashInModal = (): JSX.Element => {
   const handleCashIn = () => {
     if (amount == 0) return Toast('Invalid amount');
 
-    // save storage for cash in report...
-    setCashInReportData({
-      type: 'cash-in',
-      amount,
-      createdAt: new Date(),
-    });
+    Alert.alert(
+      'Cash In',
+      'Are you sure you want to proceed?',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          style: 'default',
+          onPress: () => {
+            // save storage for cash in report...
+            setCashInReportData({
+              type: 'cash-in',
+              amount,
+              createdAt: new Date(),
+            });
 
-    // save storage for current balance...
-    setCurrentBalance(currentBalance + amount);
+            // save storage for current balance...
+            setCurrentBalance(currentBalance + amount);
 
-    onClose();
+            onClose();
+          },
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
   };
 
   return (
@@ -56,7 +75,9 @@ const CashInModal = (): JSX.Element => {
         </View>
         <View style={tw`flex-col w-full p-3 gap-y-3`}>
           <View style={tw`flex-col w-full gap-y-2`}>
-            <Text style={tw`ml-2 font-poppins-light text-xs text-accent-1`}>Your Current Balance</Text>
+            <Text style={tw`ml-2 font-poppins-light text-xs text-accent-1`}>
+              Your Current Balance
+            </Text>
             <TextInput
               editable={false}
               style={tw`w-full p-3 rounded-xl shadow-md font-poppins text-sm text-accent-1 bg-accent-5`}
