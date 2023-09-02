@@ -28,6 +28,7 @@ const AddExpenseModal = (): JSX.Element => {
   const handleAddExpense = () => {
     if (purpose.trim() === '') return Toast('Purpose is required');
     if (amount == 0) return Toast('Invalid amount');
+    if (amount > currentBalance) return Toast('Not enough balance');
 
     // calculate the current balance and the expense amount...
     const finalCurrentBalance = currentBalance - amount;
@@ -97,7 +98,7 @@ const AddExpenseModal = (): JSX.Element => {
               keyboardType="decimal-pad"
               style={tw`w-full p-3 rounded-xl shadow-md font-poppins text-sm text-accent-2 bg-accent-1`}
               value={String(amount)}
-              onChangeText={value => setAmount(Number(value))}
+              onChangeText={value => setAmount(Number(value.replace(/[^0-9]/g, '')))}
             />
           </View>
           <TouchableOpacity

@@ -69,7 +69,7 @@ const CashInModal = (): JSX.Element => {
               keyboardType="decimal-pad"
               style={tw`w-full p-3 rounded-xl shadow-md font-poppins text-sm text-accent-2 bg-accent-1`}
               value={String(amount)}
-              onChangeText={value => setAmount(Number(value))}
+              onChangeText={value => setAmount(Number(value.replace(/[^0-9]/g, '')))}
             />
           </View>
           <TouchableOpacity
