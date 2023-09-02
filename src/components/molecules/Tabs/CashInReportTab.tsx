@@ -3,6 +3,9 @@ import moment from 'moment';
 import tw from '../../../styles/tailwind';
 import {FlatList, View, Text} from 'react-native';
 
+import CashInModal from '../Modals/CashInModal';
+import AddExpenseModal from '../Modals/AddExpenseModal';
+
 import useMoneyFormat from '../../../helpers/hooks/useMoneyFormat';
 
 const sampleData = [
@@ -41,7 +44,9 @@ const CashInReportTab = () => {
             {moment(createdAt).format('lll')}
           </Text>
         </View>
-        <Text style={tw`font-poppins-bold text-base text-accent-3`}>+ {useMoneyFormat(amount)}</Text>
+        <Text style={tw`font-poppins-bold text-base text-accent-3`}>
+          + {useMoneyFormat(amount)}
+        </Text>
       </View>
     );
   };
@@ -57,6 +62,8 @@ const CashInReportTab = () => {
         keyExtractor={itemKeyExtractor}
         renderItem={renderData}
       />
+      <CashInModal />
+      <AddExpenseModal />
     </View>
   );
 };

@@ -7,6 +7,7 @@ module.exports = {
         'accent-3': '#68BCBE',
         'accent-4': '#F5787E',
         'accent-5': '#34787A',
+        'accent-6': '#850A10',
       },
       fontFamily: {
         euphoria: 'EuphoriaScript-Regular',

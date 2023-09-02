@@ -1,18 +1,14 @@
 import React from 'react';
 import tw from '../../styles/tailwind';
-import {FeatherIcon} from '../../utils/Icons';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
 
 const TopBar = () => {
   return (
-    <View style={tw`flex-row items-center justify-between w-full px-3`}>
-      <TouchableOpacity>
-        <FeatherIcon name="settings" color="#FFFFFF" size={25} />
-      </TouchableOpacity>
-      <Text style={tw`font-pacifico text-accent-1 text-2xl`}>VenusDorm</Text>
-      <TouchableOpacity>
-        <FeatherIcon name="log-out" color="#FFFFFF" size={25} />
-      </TouchableOpacity>
+    <View style={tw`flex-col items-center w-full mt-3 px-3`}>
+      <Text style={tw`font-pacifico text-2xl text-accent-1`}>VenusDorm</Text>
+      <Text style={tw`font-poppins-light text-[10px] text-center text-accent-1`}>
+        Treasury App created with ❤️ by Veoscript.
+      </Text>
     </View>
   );
 };
