@@ -45,7 +45,7 @@ const HomeScreen = (): JSX.Element => {
           <Tab.Navigator
             initialRouteName="HomeScreenTabs"
             backBehavior="none"
-            style={tw`rounded-2xl border-2 border-accent-5`}
+            style={tw`rounded-2xl`}
             screenOptions={{
               tabBarActiveTintColor: '#FFFFFF',
               tabBarLabelStyle: [tw`font-poppins-bold capitalize text-[12px]`],

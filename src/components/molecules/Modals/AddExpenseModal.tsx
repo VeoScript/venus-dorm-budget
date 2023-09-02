@@ -75,10 +75,10 @@ const AddExpenseModal = (): JSX.Element => {
         </View>
         <View style={tw`flex-col w-full p-3 gap-y-3`}>
           <View style={tw`flex-col w-full gap-y-2`}>
-            <Text style={tw`ml-2 font-poppins-light text-xs text-accent-1`}>Current Balance</Text>
+            <Text style={tw`ml-2 font-poppins-light text-xs text-accent-1`}>Your Current Balance</Text>
             <TextInput
               editable={false}
-              style={tw`w-full p-3 rounded-xl shadow-md font-poppins text-sm text-accent-2 bg-accent-1`}
+              style={tw`w-full p-3 rounded-xl shadow-md font-poppins text-sm text-accent-1 bg-accent-6`}
               value={String(currentBalance)}
             />
           </View>
