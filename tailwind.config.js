@@ -6,9 +6,11 @@ module.exports = {
         'accent-2': '#0B0B0B',
         'accent-3': '#68BCBE',
         'accent-4': '#F5787E',
+        'accent-5': '#34787A',
       },
       fontFamily: {
         euphoria: 'EuphoriaScript-Regular',
+        pacifico: 'Pacifico-Regular',
         poppins: 'Poppins-Regular',
         'poppins-light': 'Poppins-Light',
         'poppins-medium': 'Poppins-Medium',
