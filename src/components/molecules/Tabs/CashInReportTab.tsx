@@ -23,7 +23,7 @@ const sampleData = [
   },
 ];
 
-const CashInReportTab = () => {
+const CashInReportTab = (): JSX.Element => {
   const itemKeyExtractor = (item: any, index: {toString: () => any}): string => {
     return index.toString();
   };

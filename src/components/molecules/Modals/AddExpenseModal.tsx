@@ -8,7 +8,7 @@ import StatusBarMain from '../../organisms/StatusBarMain';
 
 import {addExpenseModalStore} from '../../../helpers/store/modals';
 
-const AddExpenseModal = () => {
+const AddExpenseModal = (): JSX.Element => {
   const {isVisible, setIsVisible} = addExpenseModalStore();
 
   const onClose = () => {

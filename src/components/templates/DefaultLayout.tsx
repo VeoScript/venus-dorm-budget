@@ -7,7 +7,7 @@ interface DefaultLayoutProps {
   children: React.ReactNode;
 }
 
-const DefaultLayout: React.FC<DefaultLayoutProps> = ({children}) => {
+const DefaultLayout: React.FC<DefaultLayoutProps> = ({children}): JSX.Element => {
   return (
     <SafeAreaView style={tw`relative flex-col w-full h-full bg-accent-3`}>
       <TopBar />

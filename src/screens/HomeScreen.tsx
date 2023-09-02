@@ -11,7 +11,7 @@ import {cashInModalStore, addExpenseModalStore} from '../helpers/store/modals';
 
 const Tab = createMaterialTopTabNavigator();
 
-const HomeScreen = () => {
+const HomeScreen = (): JSX.Element => {
   const {setIsVisible: setIsVisibleCashIn} = cashInModalStore();
   const {setIsVisible: setIsVisibleAddExpense} = addExpenseModalStore();
 
