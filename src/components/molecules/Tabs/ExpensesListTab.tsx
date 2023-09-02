@@ -50,7 +50,7 @@ const ExpensesListTab = (): JSX.Element => {
           <View style={tw`flex-row items-center gap-x-1`}>
             <Text style={tw`font-poppins-light text-xs text-neutral-500`}>Current Balance:</Text>
             <Text style={tw`font-poppins-bold text-sm text-accent-2`}>
-              - {useMoneyFormat(amount)}
+              {useMoneyFormat(totalMoney - amount)}
             </Text>
           </View>
         </View>
