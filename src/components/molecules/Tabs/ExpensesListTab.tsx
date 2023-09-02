@@ -29,7 +29,7 @@ const sampleData = [
   },
 ];
 
-const ExpensesListTab = () => {
+const ExpensesListTab = (): JSX.Element => {
   const itemKeyExtractor = (item: any, index: {toString: () => any}): string => {
     return index.toString();
   };

@@ -7,7 +7,7 @@ import Modal from 'react-native-modal';
 
 import {cashInModalStore} from '../../../helpers/store/modals';
 
-const CashInModal = () => {
+const CashInModal = (): JSX.Element => {
   const {isVisible, setIsVisible} = cashInModalStore();
 
   const onClose = () => {
