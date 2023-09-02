@@ -1,3 +1,17 @@
+# About App
+
+This app is for treasurer of Venus Dorm. It can manage cash in and add expenses in offline out-of-the-box.
+
+# Screenshots
+
+![image](https://github.com/VeoScript/venus-dorm-budget/assets/26340308/7628de05-d736-453c-a45a-3797fa60e5b4)
+
+![image](https://github.com/VeoScript/venus-dorm-budget/assets/26340308/bc736eaa-43b6-4cd0-8b24-cc8813a0384d)
+
+![image](https://github.com/VeoScript/venus-dorm-budget/assets/26340308/70b49441-881e-4999-81b2-9a682f5b0eb7)
+
+![image](https://github.com/VeoScript/venus-dorm-budget/assets/26340308/e5024596-545b-4242-8320-590e2114eb76)
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
