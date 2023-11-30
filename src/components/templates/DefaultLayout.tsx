@@ -1,7 +1,7 @@
 import React from 'react';
 import tw from '../../styles/tailwind';
 import {SafeAreaView, View} from 'react-native';
-import TopBar from '../molecules/TopBar';
+import TopBar from '../atoms/TopBar';
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
